@@ -18,14 +18,18 @@ Installing on windows or linux
 Edit env values (user, password and your servers name)
 
 To test PASE COMMANDS
-fab developmentServer pase_test or fab -H myserver pase_test
+
+ fab developmentServer pase_test 
+ fab -H myserver pase_test
 
 To TEST IBMi COMMANDS:
 
 Serial tasks
+
 fab developmentServer tests
 
 Parallel tasks
+
 fab developmentServer tests2
 
 
