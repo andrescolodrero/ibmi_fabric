@@ -1,3 +1,4 @@
+from fabric.contrib.console import confirm
 from fabric.api import *
 IBM_OS = "system"
 

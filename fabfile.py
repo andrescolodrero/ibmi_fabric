@@ -1,14 +1,16 @@
 from fabric.api import *
+from fabric.contrib.console import confirm
+from fabric.colors import *
 import logging
 import lib.services as services
 import lib.systemValues as systemValues
 import lib.securitySettings as securitySettings
-
+import lib.nodeSetup as nodeJSSetup
 
 IBM_PASE = "/QOpenSys/usr/bin/bsh -c"
 IBM_OS = "system"
-env.user = "myuser
-env.password = "mypass"
+env.user = "ACL"
+env.password = "CORDOBA"
 
 # define logging
 
@@ -54,24 +56,29 @@ def init_setup():
 @parallel
 def tests():
     env.shell = IBM_OS
-    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
-    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
+    print(green("Starting Deployment"))
+    run("dspmsg qsysopr")
+    run("DSPSYSVAL SYSVAL(QPWDEXPITV)")
 
 @serial
 def tests2():
     env.shell = IBM_OS
-    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
-    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
+    print(green("Starting Deployment"))
+    run("dspmsg qsysopr")
+    run("DSPSYSVAL SYSVAL(QPWDEXPITV)")
+    print(red("Deployment Ended"))
 
 @parallel
 def deploy_ibmi():
+    print(green("Starting Deployment"))
     env.shell = IBM_OS
     execute(securitySettings.set_security_values)
     execute(systemValues.set_system_values)
     # change SHELL
     env.shell = IBM_PASE
     execute(services.set_services)
-    
+    #execute(nodeJSSetup.set_global_packages)
+    print(green("Deployment finish"))
 
    
 # TODO:
