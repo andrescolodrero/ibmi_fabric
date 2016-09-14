@@ -9,8 +9,8 @@ import lib.nodeSetup as nodeJSSetup
 
 IBM_PASE = "/QOpenSys/usr/bin/bsh -c"
 IBM_OS = "system"
-env.user = "ACL"
-env.password = "CORDOBA"
+env.user = ""
+env.password = ""
 
 # define logging
 
