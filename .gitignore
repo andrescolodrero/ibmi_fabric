@@ -1,4 +1,7 @@
-# Windows image file caches
+# PythonC
+.pyc 
+
+#Windows image file caches
 Thumbs.db
 ehthumbs.db
 
