@@ -1,10 +1,14 @@
 from fabric.api import *
 import logging
+import lib.services as services
+import lib.systemValues as systemValues
+import lib.securitySettings as securitySettings
 
 
 IBM_PASE = "/QOpenSys/usr/bin/bsh -c"
 IBM_OS = "system"
 env.user = "ACL"
+env.password = "cordoba"
 
 # define logging
 
@@ -18,14 +22,14 @@ def all_servers():
     'tisibic21', 'tisibic22',
     'aisibic21', 'aisibic22']
 
-def development():
+def developmentServers():
 # Define my hosts.
      env.hosts = ['disibic21', 'disibic22']
-def test():
+def testServers():
 # Define my hosts.
      env.hosts = ['tisibic21', 'tisibic22']
      
-def production():
+def productionServers():
 # Define my hosts.
      env.hosts = ['aisibic21', 'aisibic22']
 
@@ -33,9 +37,6 @@ def pase_test():
     env.shell = IBM_PASE
     run('uname -s')
 
-def system_values():
-    env.shell = IBM_OS
-    run('dspsysval qautovrt')
 
 def init_setup():
     env.shell = IBM_PASE
@@ -50,19 +51,28 @@ def init_setup():
         print("Directory doesnt exist. Creating /home/" + env.user)
         run("mkdir /home/" + env.user)
 
-def system_values():
-    # TO-DO more system values.
+@parallel
+def tests():
     env.shell = IBM_OS
-    run('CHGSYSVAL SYSVAL(QASTLVL) VALUE(*INTERMED)')
+    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
+    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
 
-def security_auditing():
+@serial
+def tests2():
     env.shell = IBM_OS
-    run('CHGSECAUD QAUDCTL(*ALL) QAUDLVL(*DFTSET)')
+    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
+    run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
 
-def deploy():
-    execute(pase_test)
-    execute(system_values)
-    execute(security_auditing)
+@parallel
+def deploy_ibmi():
+    env.shell = IBM_OS
+    execute(securitySettings.set_security_values)
+    execute(systemValues.set_system_values)
+    # change SHELL
+    env.shell = IBM_PASE
+    execute(services.set_services)
+    
+
    
 # TODO:
 # Set Enviromental Variables

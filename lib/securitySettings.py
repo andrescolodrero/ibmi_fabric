@@ -2,11 +2,12 @@ from fabric.api import *
 IBM_OS = "system"
 
 def set_security_values():
+    env.shell = IBM_OS
     run("CHGSYSVAL SYSVAL(QPWDEXPITV) VALUE('90')")
     run("CHGSYSVAL SYSVAL(QPWDLMTREP) VALUE('2')")
     # bASIC AND OLD SEC SETTINGS. NON-SECURE
-    run("CHGSYSVAL SYSVAL(QPWDMAXLEN) VALUE('10')")
-    run("CHGSYSVAL SYSVAL(QPWDMINLEN) VALUE('5')")
+    run("CHGSYSVAL SYSVAL(QPWDMAXLEN) VALUE(10)")
+    run("CHGSYSVAL SYSVAL(QPWDMINLEN) VALUE(5)")
     run("CHGSYSVAL SYSVAL(QPWDRQDDIF) VALUE('7')")
     # Necesary for PowerHA
     run("CHGSYSVAL SYSVAL(QRETSVRSEC) VALUE('1')")

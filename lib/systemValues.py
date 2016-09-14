@@ -7,7 +7,6 @@ def set_system_values():
     run('CHGSYSVAL SYSVAL(QASTLVL) VALUE(*INTERMED)')
     run('CHGSYSVAL SYSVAL(QAUTOVRT) VALUE(*NOMAX)')
     run("CHGSYSVAL SYSVAL(QCMNRCYLMT) VALUE('2 5')")
-    run("CHGSYSVAL SYSVAL(QDEVRCTACB) VALUE('*ENDJOBNOLIST')")
     run("CHGSYSVAL SYSVAL(QDSCJOBITV) VALUE('60')")
     run("CHGSYSVAL SYSVAL(QJOBMSGQFL) VALUE('*WRAP')")
     #Only for non-production
@@ -17,7 +16,7 @@ def set_system_values():
     # i trust my code
     run("CHGSYSVAL SYSVAL(QVFYOBJRST) VALUE('3')")
     # time adjustment. It needs to adjust the server
-     run("CHGSYSVAL SYSVAL(QTIMADJ) VALUE('QIBM_OS400_SNTP')")
+    run("CHGSYSVAL SYSVAL(QTIMADJ) VALUE('QIBM_OS400_SNTP')")
  
 
 def get_system_values():
