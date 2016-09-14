@@ -7,8 +7,8 @@ import lib.securitySettings as securitySettings
 
 IBM_PASE = "/QOpenSys/usr/bin/bsh -c"
 IBM_OS = "system"
-env.user = "ACL"
-env.password = "cordoba"
+env.user = "myuser
+env.password = "mypass"
 
 # define logging
 
