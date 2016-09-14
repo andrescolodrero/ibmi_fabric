@@ -9,15 +9,24 @@ Installing on windows or linux
 
 
 
-To check available tasks:
+# To check available tasks:
 
  fab --list
  
-To run some tests
+# To run some tests
 
-fab production pase_test
-or
-fab production os_test
+Edit env values (user, password and your servers name)
+
+To test PASE COMMANDS
+fab developmentServer pase_test or fab -H myserver pase_test
+
+To TEST IBMi COMMANDS:
+
+Serial tasks
+fab developmentServer tests
+
+Parallel tasks
+fab developmentServer tests2
 
 
 
