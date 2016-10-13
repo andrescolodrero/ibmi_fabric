@@ -9,9 +9,14 @@ import lib.fileTransfer as fileTransfer
 
 IBM_PASE = "/QOpenSys/usr/bin/bsh -c"
 IBM_OS = "system"
+<<<<<<< HEAD
 env.user = "ACL"
 env.key_filename = 'id_rsa.pub'
 
+=======
+env.user = ""
+env.password = ""
+>>>>>>> origin/master
 
 # define logging
 
